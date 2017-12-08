@@ -20,11 +20,70 @@ Vue.component('produit',{
 	props : ['produit'],
 	template : 
 		'<div class="produit">\
-			<h2>{{ produit.nom }}</h2>\
-			<p>{{ produit.description }}</p>\
+			<b>{{ produit.nom }}</b>\
+			<p><small>{{ produit.description }}</small></p>\
 			<big>{{ produit.prix }}</big>\
-			<!-- image -->\
-			<!-- bouton "ajouter au panier"-->\
+			<image-produit :un-produit="produit"></image-produit>\
+			<bouton-ajout :un-produit="produit"></bouton-ajout>\
 		</div>'
+});
+
+/***************************
+ * Affiche l'image d'un produit
+ ***************************/
+Vue.component('image-produit',{
+	props : ['un-produit'],
+	template :
+		'<div class="image-produit" :alt="unProduit.nom" :style="\'background-image:url(\'+unProduit.image+\')\'"></div>'
+
+});
+
+
+/***************************
+ * Bouton pour ajouter un produit au
+ ***************************/
+Vue.component('bouton-ajout',{
+	props : ['un-produit'],
+	template :
+		'<button @click="ajoutProduit">Ajouter au panier</button>',
+	methods : {
+		ajoutProduit() {
+			
+			axios.post(endpoint+'cart/'+this.unProduit.id).then(function(response){
+				var panier = response.data;
+				app.$emit('panier-modifie',panier);
+			});
+
+		}
+	}
+});
+
+
+
+/***************************
+ * Affiche le panier
+ ***************************/
+Vue.component('panier',{
+	props : ['panier'],
+	template :
+		`<div class="panier">
+			<b>Votre panier</b>
+			<produit-panier v-for="produit in panier" :produit="produit">
+			</produit-panier>
+		</div>` 
+
+});
+
+
+/***************************
+ * Affiche un produit du panier
+ ***************************/
+Vue.component('produit-panier',{
+	props : ['produit'],
+	template :
+		`<div class="produit-panier">
+			<b>{{ produit.nom }}</b> <small>{{ produit.qte }}</small> {{ produit.prix }}€
+		</div>` 
+
 });
 

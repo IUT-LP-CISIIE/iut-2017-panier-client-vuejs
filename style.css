@@ -1,8 +1,33 @@
 .liste-produits .produit  {
 	float:left;
 	width:150px;
-	height:150px;
+	height:250px;
 	border:1px solid #ccc;
 	padding:15px;
 	margin:15px;
+}
+
+
+.image-produit {
+	width:100px;
+	height:80px;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:center;
+}
+
+.panier {
+	padding:10px;
+	background:white;
+	border:2px solid red;
+	width:300px;
+	min-height:100px;
+	position:fixed;
+	top:0;
+	right:0;
+	font-size:80%;
+}
+.produit-panier {
+	border-top:1px solid #ccc;
+	line-height:20px;
 }
