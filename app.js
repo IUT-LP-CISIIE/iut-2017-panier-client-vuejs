@@ -1,5 +1,5 @@
 Vue.prototype.$http = axios
-var endpoint = '../jsserver/public/';
+var endpoint = '../iut-2017-panier-serveur/public/';
 
 var app = new Vue({
     el: '#app',
