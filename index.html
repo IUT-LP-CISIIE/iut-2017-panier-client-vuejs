@@ -1,28 +1,23 @@
 <!doctype html>
-<html lang="fr">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Panier</title>
-	<script src="https://unpkg.com/vue"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
-	<script src="components.js"></script>
+	<meta charset="utf-8">
+	<title>Panier avec VueJS</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="app">
 
-	<div id="app">
-		<div class="produits">
-			<produit v-for="produit in produits" :key="produit.id" :produit="produit"></produit>
-		</div>
-		<div class="panier" v-bind:class="{ 'panier-ok': panierValide }">
-			<h3>Panier</h3>
-			<div class="panier-contenu">
-				<panier-produit v-for="produit in panier" :key="produit.id" :produit="produit"></panier-produit>
-			</div>
-			<input type="button" v-on:click="commander" value="Commander">
-			<input type="button" v-on:click="vider" value="Vider le panier">
-		</div>
-	</div>
+<h1>Boutique</h2>
+<liste-produits :produits="produits"></liste-produits>
+
+
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
+<script src="composants.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
-<script src="app.js"></script>
