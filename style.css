@@ -31,3 +31,15 @@
 	border-top:1px solid #ccc;
 	line-height:20px;
 }
+
+
+.produit-ok {
+	background: green;
+}
+
+.panier-en-attente {
+	border-color:orange;
+}
+.panier-ok {
+	border-color:green;
+}

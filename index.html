@@ -10,7 +10,7 @@
 
 <h1>Boutique</h2>
 <liste-produits :produits="produits"></liste-produits>
-<panier :panier="panier"></panier>
+<panier :panier="panier" :class="{ 'panier-en-attente': panierEnAttente,  'panier-ok': panierOk }"></panier>
 
 </div>
 

@@ -6,7 +6,7 @@ var app = new Vue({
 	/*************************
 	* code éxécuté au chargement de la page (équivalent à "onload")
 	**************************/
-	created() {
+	mounted() {
 		axios.get(endpoint+ 'products').then(function(response){
 			app.produits = response.data;
 		});
@@ -18,7 +18,11 @@ var app = new Vue({
 
 
 		this.$on('panier-modifie',function(panier) {
-			app.panier = panier;
+			this.miseAJourPanier(panier);
+		});
+
+		this.$on('produit-panier-ok',function(id) {
+			this.produitPanierOk(id);
 		});
 
 	},
@@ -26,11 +30,26 @@ var app = new Vue({
 
 	data : {
 		produits : [],
-		panier : []	
+		panier : [],
+		panierOk : false,	
+		panierEnAttente : false,
+		produitsPanierOk : 0,
 	},
 	methods : {
 		miseAJourPanier(panier) {
-			app.panier = panier;		
+			this.panierEnAttente=false;
+			this.panierOk=false;
+			this.panier = panier;		
+		},
+		produitPanierOk(id) {
+			this.panier[id].ok = true;
+			this.produitsPanierOk++;
+			if(this.produitsPanierOk == Object.keys(this.panier).length) {
+				this.panierEnAttente=false;
+				this.panierOk=true;
+			} else {
+				this.panierEnAttente=true;
+			}
 		}
 	}
 

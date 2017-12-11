@@ -96,8 +96,12 @@ Vue.component('boutons-panier',{
 		`,
 	methods : {
 		commander() {
-			for(id in this.panier) {
-				var produit = this.panier[id];
+			for(cle in this.panier) {
+				var produit = this.panier[cle];
+
+				axios.put(endpoint+ 'cart/'+produit.id+'/buy').then(function(response){
+					app.$emit('produit-panier-ok',response.data.product);
+				});	
 			}
 		},
 		viderPanier() {
@@ -118,7 +122,7 @@ Vue.component('boutons-panier',{
 Vue.component('produit-panier',{
 	props : ['produit'],
 	template :
-		`<div class="produit-panier">
+		`<div class="produit-panier" :class="{ 'produit-ok': produit.ok }">
 			<b>{{ produit.nom }}</b> <small>{{ produit.qte }}</small> {{ produit.prix }}€
 		</div>` 
 
