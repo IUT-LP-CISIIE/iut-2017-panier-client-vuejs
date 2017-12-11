@@ -10,6 +10,7 @@ var app = new Vue({
 		axios.get(endpoint+ 'products').then(function(response){
 			app.produits = response.data;
 		});
+
 		axios.get(endpoint+ 'cart').then(function(response){
 			app.panier = response.data;
 			
@@ -17,7 +18,7 @@ var app = new Vue({
 
 
 		this.$on('panier-modifie',function(panier) {
-			this.miseAJourPanier(panier);
+			app.panier = panier;
 		});
 
 	},

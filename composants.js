@@ -70,9 +70,46 @@ Vue.component('panier',{
 			<b>Votre panier</b>
 			<produit-panier v-for="produit in panier" :produit="produit">
 			</produit-panier>
-		</div>` 
+			<boutons-panier :panier="panier" v-show="!panierVide"></boutons-panier>
+		</div>`,
+	computed : {
+		panierVide() {
+			return this.panier.length == 0;
+		}		
+	}
 
 });
+
+
+/***************************
+ * Affiche les boutons d'action du panier
+ ***************************/
+Vue.component('boutons-panier',{
+	props : ['panier'],
+	template :
+		`
+			<div class="boutons-panier">
+			<hr>
+			<input type="button" value="Commander" @click="commander"><br>
+			<input type="button" value="Vider panier" @click="viderPanier">
+			</div>
+		`,
+	methods : {
+		commander() {
+			for(id in this.panier) {
+				var produit = this.panier[id];
+			}
+		},
+		viderPanier() {
+			axios.delete(endpoint+ 'cart').then(function(response){
+				app.miseAJourPanier(response.data);
+			});	
+		}
+	}
+
+});
+
+			
 
 
 /***************************
